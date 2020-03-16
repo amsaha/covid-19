@@ -9,5 +9,5 @@ The instructions for generating your own map is available at: https://www.google
 
 ## Steps:
 
-1. ./convert\_to\_csv.bash https://www.mohfw.gov.in/
-2. Upload the output file generated at uploads on Google Maps.
+1. ./convert\_to\_csv.bash
+2. Upload the output file generated in uploads/ directory on to Google Maps.
