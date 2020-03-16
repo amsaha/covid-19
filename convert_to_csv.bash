@@ -3,16 +3,16 @@
 set -x         # prints out whatever it is executing
 set -o nounset # does not allow unset variables to be used
 
-ARGS=1        # Number of arguments expected.
+ARGS=0        # Number of arguments expected.
 E_BADARGS=65  # Exit value if incorrect number of args passed.
 
-test $# -ne $ARGS && echo -e "\033[1mUsage: $0 https://www.mohfw.gov.in/ \033[0m" && exit $E_BADARGS
+test $# -ne $ARGS && echo -e "\033[1mUsage: $0  \033[0m" && exit $E_BADARGS
 
 # Get the location of the script no matter where you ran it from
 SCRIPT_PATH=$(cd `dirname ${0}`; pwd)
 output_dir="uploads"
 
-url=$1
+url="https://www.mohfw.gov.in/"
 date=`date`
 
 curl $url -o temp
