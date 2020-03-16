@@ -9,6 +9,5 @@ The instructions for generating your own map is available at: https://www.google
 
 ## Steps:
 
-1. The data is simply cut and pasted to a file in downloads/ directory
-2. ./convert\_to\_csv.bash downloads/15-Mar-2020-855am-IST
-3. Upload the output file (uploads/15-Mar-2020-855am-IST.csv) at Google Maps.
+1. ./convert\_to\_csv.bash https://www.mohfw.gov.in/
+2. Upload the output file generated at uploads on Google Maps.
