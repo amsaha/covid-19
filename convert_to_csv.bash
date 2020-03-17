@@ -23,13 +23,16 @@ sed -e 's/).*P>//' -e 's/ /-/g' -e 's/:/./' -e 's/-PM/PM/' -e 's/-AM/AM/'`
 total_cases=`grep "Total number of confirmed COVID 2019 cases across India" temp |\
  cut -d: -f2 | sed -e 's/^ *//g'`
 
-file="downloads/mohfw.$timestamp.total-$total_cases.html"
-outfile="uploads/$timestamp.total-$total_cases.CSV"
+tag=`echo ${timestamp}.total-${total_cases} | sed -e 's/ //g'`
+
+file="downloads/mohfw.$tag.html"
+outfile="uploads/$tag.CSV"
 
 cp temp $file
 
 sed -n '/S. No/,/Total number of confirmed cases/p' $file  |\
-grep -v "tr>" | sed -e 's/<\/td>/,/g' | sed -e 's/<[^>]*>//g' |\
+grep -v "tr>" |\
+sed -e 's/<\/td>/,/g' -e 's/<\/th>/,/g' | sed -e 's/<[^>]*>//g' |\
 sed -e 's/Name of//' -e 's/Union Territory of//' -e 's/Ladakh/Leh/' |\
 grep "\S" | awk '{printf $0;printf " "}NR % 6 ==0 {print " "}' |\
 sed -e 's/Total Confirmed cases//g' -e 's/(//g' -e 's/)//g'|\
