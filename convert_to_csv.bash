@@ -18,7 +18,7 @@ date=`date`
 curl $url -o temp
 
 timestamp=`grep -i "as on" temp | cut -d" " -f6,8,9 |\
-sed -e 's/).*P>//' -e 's/ /-/g' -e 's/:/./' -e 's/-P/P/'`
+sed -e 's/).*P>//' -e 's/ /-/g' -e 's/:/./' -e 's/-PM/PM/' -e 's/-AM/AM/'`
 
 total_cases=`grep "Total number of confirmed COVID 2019 cases across India" temp |\
  cut -d: -f2 | sed -e 's/^ *//g'`
@@ -32,6 +32,7 @@ sed -n '/S. No/,/Total number of confirmed cases/p' $file  |\
 grep -v "tr>" | sed -e 's/<\/td>/,/g' | sed -e 's/<[^>]*>//g' |\
 sed -e 's/Name of//' -e 's/Union Territory of//' -e 's/Ladakh/Leh/' |\
 grep "\S" | awk '{printf $0;printf " "}NR % 6 ==0 {print " "}' |\
+sed -e 's/Total Confirmed cases//g' -e 's/(//g' -e 's/)//g'|\
 grep -v "Total number of confirmed cases in India" | sed -e 's/, *$//g' > $outfile
 
 cat $outfile
