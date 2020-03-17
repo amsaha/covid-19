@@ -23,7 +23,16 @@ sed -e 's/).*P>//' -e 's/ /-/g' -e 's/:/./' -e 's/-PM/PM/' -e 's/-AM/AM/'`
 total_cases=`grep "Total number of confirmed COVID 2019 cases across India" temp |\
  cut -d: -f2 | sed -e 's/^ *//g'`
 
-tag=`echo ${timestamp}.total-${total_cases} | sed -e 's/ //g'`
+active=`grep "Total number of Active" temp |\
+  cut -d: -f2 | sed -e 's/ //g' -e 's/<[^>]*>//g'`
+cured=`grep "Total number of Discharged" temp |\
+  cut -d: -f2 | sed -e 's/ //g' -e 's/<[^>]*>//g'`
+deaths=`grep "Total number of Deaths" temp |\
+  cut -d: -f2 | sed -e 's/ //g' -e 's/<[^>]*>//g'`
+
+echo "Active: ${active} Cured: ${cured} Deaths: ${deaths}"
+
+tag=`echo ${timestamp}.A${active}C${cured}D${deaths} | sed -e 's/ //g'`
 
 file="downloads/mohfw.$tag.html"
 outfile="uploads/$tag.CSV"
