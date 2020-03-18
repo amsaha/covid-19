@@ -40,7 +40,7 @@ outfile="uploads/$tag.CSV"
 cp temp $file
 
 sed -n '/S. No/,/Total number of confirmed cases/p' $file  |\
-grep -v "tr>" |\
+grep -v "tr>" | grep -v "/tr" |\
 sed -e 's/<\/td>/,/g' -e 's/<\/th>/,/g' | sed -e 's/<[^>]*>//g' |\
 sed -e 's/Name of//' -e 's/Union Territory of//' -e 's/Ladakh/Leh/' |\
 grep "\S" | awk '{printf $0;printf " "}NR % 6 ==0 {print " "}' |\
